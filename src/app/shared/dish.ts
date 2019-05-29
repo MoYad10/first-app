@@ -4,7 +4,7 @@ export class Dish {
   id: string;
   name: string;
   image: string;
-  category: boolean;
+  category: string;
   featured: boolean;
   label: string;
   price: string;
