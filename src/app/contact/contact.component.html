@@ -38,21 +38,34 @@
 
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your feedback</h3>
-    <form novalidate [FormGroup]="feedbackForm">
+    <p>{{feedbackForm.value | json}} {{feedbackForm.status}}</p>
+    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field class="half-width">
           <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
+          <mat-error *ngIf="feedbackForm.get('firstname').hasError('required') && feedbackForm.get('firstname').touched">
+            First Name is required
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="half-width">
           <input matInput formControlName="lastname" placeholder="Last Name" type="text" required>
+          <mat-error *ngIf="feedbackForm.get('flasstname').hasError('required') && feedbackForm.get('lastname').touched">
+            Last Name is required
+          </mat-error>
         </mat-form-field>
       </p>
       <p>
         <mat-form-field class="half-width">
           <input matInput formControlName="telnum" placeholder="Tel number" type="tel" required>
+          <mat-error *ngIf="feedbackForm.get('telnum').hasError('required') && feedbackForm.get('telnum').touched">
+            Tel number is required
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="half-width">
           <input matInput formControlName="email" placeholder="Email" type="email" required>
+          <mat-error *ngIf="feedbackForm.get('email').hasError('required') && feedbackForm.get('email').touched">
+            Email is required
+          </mat-error>
         </mat-form-field>
       </p>
       <table class="form-size">
@@ -73,7 +86,9 @@
           </textarea>
         </mat-form-field>
       </p>
-      <button matButton type="submit" class="background-primary text-floral-white">Submit</button>
+      <button matButton type="submit" class="background-primary text-floral-white"
+          [disabled]="feedbackForm.invalid">Submit</button>
     </form>
   </div>
+
 </div>
